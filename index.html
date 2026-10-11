@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inagrimex - Registro Producción</title>
+    <!-- Enlace a la pestaña CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="header-title emissive-cyan">
+        <span>> OPERADOR</span>
+        <span class="emissive-purple">TURNO 1</span>
+    </div>
+
+    <!-- PANEL DE CAPTURA -->
+    <div class="ultra-glass-card">
+        <div class="time-selector">
+            <button class="btn-icon" onclick="cambiarHora(-1)">-</button>
+            <div class="ultra-glass-inset time-display" style="padding: 10px;">
+                <div id="displayHora" class="emissive-green">8:00 AM</div>
+            </div>
+            <button class="btn-icon" onclick="cambiarHora(1)">+</button>
+        </div>
+
+        <div style="text-align: center; margin: 16px 0;" class="emissive-purple">> CAPTURAR PRODUCCIÓN</div>
+
+        <div class="ultra-glass-inset input-row">
+            <label>KILOS:</label>
+            <input type="number" id="inputKilos" placeholder="0.0">
+        </div>
+
+        <div class="ultra-glass-inset input-row">
+            <label>MERMA:</label>
+            <input type="number" id="inputMerma" placeholder="0.0">
+        </div>
+
+        <div class="action-buttons">
+            <!-- Botón Deshacer -->
+            <button id="btnDeshacer" class="btn-icon btn-circle emissive-red" onclick="deshacerLogico()" disabled>↶</button>
+            <!-- Botón Guardar (con respiración) -->
+            <button class="btn-icon btn-circle emissive-green btn-guardar-animado" onclick="guardarLogico()">✓</button>
+        </div>
+    </div>
+
+    <!-- PANEL REPORTE POR HORA -->
+    <div class="ultra-glass-card">
+        <div class="emissive-cyan">> REPORTE POR HORA</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>HORA</th>
+                    <th>KG</th>
+                    <th>ROLLOS</th>
+                    <th>MERMA</th>
+                </tr>
+            </thead>
+            <tbody id="tablaHoras">
+                <!-- Se llena dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PANEL PRODUCCIÓN TOTAL -->
+    <div class="ultra-glass-card">
+        <div class="emissive-cyan" style="margin-bottom: 16px;">> PRODUCCIÓN TOTAL</div>
+        <div class="ultra-glass-inset">
+            <div class="total-row">
+                <span style="color: var(--text-secondary); font-weight: bold;">KILOS TOTALES:</span>
+                <span class="emissive-green" id="totalKg">0.0 KG</span>
+            </div>
+            <div class="total-row">
+                <span style="color: var(--text-secondary); font-weight: bold;">ROLLOS TOTALES:</span>
+                <span class="emissive-cyan" id="totalRollos">0</span>
+            </div>
+            <div class="total-row" style="margin-bottom: 0;">
+                <span style="color: var(--text-secondary); font-weight: bold;">MERMA TOTAL:</span>
+                <span class="emissive-red" id="totalMerma">0.0 KG</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN DE VACIAR TODO -->
+    <button class="btn-large" onclick="abrirModalReset()">> VACIAR REGISTROS (RESET)</button>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div class="modal-overlay" id="modalReset">
+        <div class="ultra-glass-card modal-content">
+            <div class="emissive-red" style="font-size: 20px; margin-bottom: 16px;">¡ADVERTENCIA!</div>
+            <p style="color: var(--text-primary); font-size: 14px; margin-bottom: 10px;">Estás a punto de eliminar <b>toda la producción</b> y borrar la tabla.</p>
+            <p style="color: var(--text-secondary); font-size: 12px;">Esta acción no se puede deshacer.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn btn-cancel" onclick="cerrarModalReset()">CANCELAR</button>
+                <button class="modal-btn btn-confirm" onclick="ejecutarVaciadoTotal()">VACIAR TODO</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlace a la pestaña Javascript -->
+    <script src="script.js"></script>
+</body>
+</html>
